@@ -15,37 +15,36 @@
             font-family: 'Helvetica Neue', Arial, sans-serif; 
             background-color: #121212; 
             color: #f5f5f5; 
-            overflow: hidden; /* Sayfanın dikeyde komple kaymasını engeller */
+            overflow: hidden; 
             display: flex;
             flex-direction: column;
             height: 100vh;
         }
 
-        /* Üst Kısım: Sabit Görsel Alanı */
+        /* Üst Kısım: Sabit Görsel Alanı (Boyutları Büyütüldü) */
         .fixed-image-section {
             width: 100%;
-            height: 45vh; /* Ekranın üst %45'i */
+            height: 55vh; /* Ekranın %55'i görsele ayrıldı */
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Görseli metne yakın tutmak için alta hizalar */
-            padding-bottom: 20px;
+            align-items: flex-end; 
+            padding-bottom: 10px;
             position: relative;
         }
 
         .main-img {
-            width: 90%;
-            max-width: 350px;
-            height: 35vh; 
-            object-fit: cover;
+            width: 95%; /* Genişlik %95'e çıkarıldı */
+            max-width: 500px; /* Maksimum genişlik sınırı artırıldı */
+            height: 52vh; /* Görsel yüksekliği artırıldı */
+            object-fit: contain; /* GÖRSELİN KESİLMEMESİNİ, TAM SIĞMASINI SAĞLAR */
             border-radius: 12px;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.6);
-            background-color: #2a2a2a; 
+            background-color: transparent; /* Çerçevenin arkasındaki gri kutu kaldırıldı */
         }
 
-        /* Alt Kısım: Kaydırma Konteyneri (Sadece Metinler İçin) */
+        /* Alt Kısım: Kaydırma Konteyneri */
         .carousel-container {
             width: 100%;
-            height: 55vh; /* Ekranın alt %55'i */
+            height: 45vh; /* Ekranın alt %45'i metinlere kaldı */
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory; 
@@ -70,9 +69,9 @@
         /* Metin Alanı */
         .slide-text {
             width: 100%;
-            max-width: 350px;
-            height: 45vh; /* Alt alanın içindeki maksimum metin boyu */
-            overflow-y: auto; /* Yazı uzunsa sadece kendi içinde dikey kayar */
+            max-width: 450px;
+            height: 38vh; /* Yeni alana göre dikey kaydırma boyu ayarlandı */
+            overflow-y: auto; 
             text-align: center;
             padding: 0 10px;
         }
@@ -91,7 +90,7 @@
         /* Kaydırma İpucu (Swipe animasyonu) */
         .swipe-hint {
             position: absolute;
-            bottom: 15px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.8rem;
@@ -110,6 +109,7 @@
 <body>
 
 <div class="fixed-image-section">
+    <!-- Görsel isminin main-img.png olduğundan emin ol -->
     <img src="main-img.png" alt="Ana Görsel" class="main-img">
 </div>
 
