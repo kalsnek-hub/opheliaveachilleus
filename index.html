@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akhilleus ile Ophelia - Mobil Tanıtım</title>
+    <style>
+        /* Temel Ayarlar ve Sıfırlama */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        body { 
+            font-family: 'Helvetica Neue', Arial, sans-serif; 
+            background-color: #121212; /* Estetik koyu arka plan */
+            color: #f5f5f5; 
+            overflow-x: hidden; 
+        }
+
+        /* Kaydırma Konteyneri (Yatay Carousel Formu) */
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory; /* Mıknatıs etkisi */
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* iOS için akıcı kaydırma */
+            height: 100vh; /* Tam ekran yüksekliği */
+            width: 100vw;  /* Tam ekran genişliği */
+        }
+
+        /* Çirkin scroll çubuklarını gizleme */
+        .carousel-container::-webkit-scrollbar { display: none; }
+        .carousel-container { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Her Bir Yaprak (Slayt) */
+        .slide {
+            flex: 0 0 100vw;
+            height: 100vh;
+            scroll-snap-align: start; /* Ekrana tam oturması için */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Görsel Alanı */
+        .slide-img {
+            width: 100%;
+            max-width: 350px;
+            height: 55vh;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.6);
+            margin-bottom: 25px;
+            background-color: #2a2a2a; /* Görsel yüklenene kadar görünecek renk */
+        }
+
+        /* Metin Alanı */
+        .slide-text {
+            max-width: 350px;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .slide-text p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #d1d1d1;
+        }
+
+        .slide-text strong {
+            color: #ffffff;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Kaydırma İpucu (Swipe animasyonu) */
+        .swipe-hint {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.8rem;
+            color: #888;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; transform: translateX(5px); }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="carousel-container">
+    <section class="slide">
+        <img src="https://via.placeholder.com/350x500/1a1a1a/ffffff?text=Karakalem+Afis" alt="Karakalem Afiş" class="slide-img">
+        <div class="slide-text">
+            <strong>Akhilleus ile Ophelia</strong>
+            <p>Efsanevi bir savaşçı ile trajik bir aşığın yollarının kesiştiği bu hikaye, alışılmışın dışında bir yüzleşme sunuyor.</p>
+        </div>
+        <div class="swipe-hint">KAYDIRIN &rarr;</div>
+    </section>
+
+    <section class="slide">
+        <img src="https://via.placeholder.com/350x500/222222/ffffff?text=Isik+Tasarimi" alt="Sahne Işıkları" class="slide-img">
+        <div class="slide-text">
+            <strong>Atmosfer ve Işık</strong>
+            <p>Minimalist bir sahne, grandMA2 ile işlenmiş titiz bir ışık tasarımı... Karakterlerin psikolojik derinliklerine doğru görsel bir yolculuk.</p>
+        </div>
+        <div class="swipe-hint">KAYDIRIN &rarr;</div>
+    </section>
+
+    <section class="slide">
+        <img src="https://via.placeholder.com/350x500/2a2a2a/ffffff?text=Ekip" alt="Ekip Bilgisi" class="slide-img">
+        <div class="slide-text">
+            <strong>Sahnede Buluşalım</strong>
+            <p>Yönetmen koltuğunda Umut Külen, sahnede Yağmur Alkaya. Ses ve asistan ekibimizin dokunuşlarıyla bu deneyimin bir parçası olun.</p>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
