@@ -21,10 +21,10 @@
             height: 100vh;
         }
 
-        /* Üst Kısım: Sabit Görsel Alanı (Boyutları Büyütüldü) */
+        /* Üst Kısım: Sabit Görsel Alanı (%50) */
         .fixed-image-section {
             width: 100%;
-            height: 55vh; /* Ekranın %55'i görsele ayrıldı */
+            height: 50vh; 
             display: flex;
             justify-content: center;
             align-items: flex-end; 
@@ -33,21 +33,23 @@
         }
 
         .main-img {
-            width: 95%; /* Genişlik %95'e çıkarıldı */
-            max-width: 500px; /* Maksimum genişlik sınırı artırıldı */
-            height: 52vh; /* Görsel yüksekliği artırıldı */
-            object-fit: contain; /* GÖRSELİN KESİLMEMESİNİ, TAM SIĞMASINI SAĞLAR */
+            width: 95%; 
+            max-width: 500px; 
+            height: 48vh; 
+            object-fit: contain; 
             border-radius: 12px;
-            background-color: transparent; /* Çerçevenin arkasındaki gri kutu kaldırıldı */
+            background-color: transparent; 
         }
 
-        /* Alt Kısım: Kaydırma Konteyneri */
+        /* Alt Kısım: Kaydırma Konteyneri (%50) */
         .carousel-container {
             width: 100%;
-            height: 45vh; /* Ekranın alt %45'i metinlere kaldı */
+            height: 50vh; 
             display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory; 
+            flex-direction: column; /* Yataydan dikeye çevrildi */
+            overflow-y: auto; /* Yukarı/Aşağı kaydırma aktif edildi */
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory; /* Y ekseninde mıknatıs etkisi */
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch; 
         }
@@ -57,11 +59,14 @@
 
         /* Her Bir Yaprak (Metin Slaytı) */
         .slide {
-            flex: 0 0 100vw;
-            height: 100%;
+            flex: 0 0 50vh; /* Slayt yüksekliği konteyner boyuna (50vh) eşitlendi */
+            height: 50vh;
+            width: 100vw;
             scroll-snap-align: start; 
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: center; /* Yazıları dikeyde ortalar */
+            align-items: center;
             padding: 0 20px;
             position: relative;
         }
@@ -70,7 +75,7 @@
         .slide-text {
             width: 100%;
             max-width: 450px;
-            height: 38vh; /* Yeni alana göre dikey kaydırma boyu ayarlandı */
+            max-height: 45vh; 
             overflow-y: auto; 
             text-align: center;
             padding: 0 10px;
@@ -87,29 +92,27 @@
             font-style: italic;
         }
 
-        /* Kaydırma İpucu (Swipe animasyonu) */
+        /* Kaydırma İpucu (Aşağıdan yukarı animasyon) */
         .swipe-hint {
             position: absolute;
             bottom: 10px;
             left: 50%;
-            transform: translateX(-50%);
             font-size: 0.8rem;
             color: #888;
             letter-spacing: 1px;
-            animation: pulse 2s infinite;
+            animation: pulseY 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; margin-left: 10px; }
-            100% { opacity: 0.5; margin-left: 0; }
+        @keyframes pulseY {
+            0% { opacity: 0.5; transform: translate(-50%, 0); }
+            50% { opacity: 1; transform: translate(-50%, -8px); }
+            100% { opacity: 0.5; transform: translate(-50%, 0); }
         }
     </style>
 </head>
 <body>
 
 <div class="fixed-image-section">
-    <!-- Görsel isminin main-img.png olduğundan emin ol -->
     <img src="main-img.png" alt="Ana Görsel" class="main-img">
 </div>
 
@@ -119,13 +122,14 @@
         <div class="slide-text">
             <p>"Beni yüzyıllar boyunca zayıf, histerik, sadece bir erkeğin aşkı için aklını yitiren veya onun için yok olan trajik bir gölge gibi anlattılar. Nehrin sularına kendimi bırakırken ya da tanrılara kurban edilirken, çaresizliğimi asaletim sandılar. Oysa ben zayıf değildim; sadece kendi sesimi duyurabileceğim, nefes alabileceğim adil bir dünya bırakmadılar bana. Erkeklerin yazdığı o büyük metinlerin satır aralarında, itaat etmeyi reddeden öfkeli sesim sonsuza dek yankılanacak.”</p>
         </div>
-        <div class="swipe-hint">KAYDIRIN &rarr;</div>
+        <div class="swipe-hint">YUKARI KAYDIRIN &uarr;</div>
     </section>
 
     <section class="slide">
         <div class="slide-text">
             <p>"Gece eve dönerken adımlarımı saymaktan, gölgelerden korkmaktan yoruldum. Anahtarlarımı parmaklarımın arasına bir silah gibi sıkıştırmak, sadece var olduğum için sürekli tetikte olmak... Dünyanın yarısını oluşturan bizler, neden kendi mahallemizde, kendi sokaklarımızda birer mülteci gibi yaşıyoruz? Her ıssız sokakta hissettiğim o ensedeki soğuk nefes, aslında bana sınırımı ve 'yerimi' hatırlatan bu hastalıklı düzenin ta kendisi."</p>
         </div>
+        <div class="swipe-hint">YUKARI KAYDIRIN &uarr;</div>
     </section>
 
     <section class="slide">
