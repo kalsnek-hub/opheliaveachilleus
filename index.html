@@ -13,78 +13,43 @@
         }
         body { 
             font-family: 'Helvetica Neue', Arial, sans-serif; 
-            background-color: #000000; 
+            background-color: #121212; 
             color: #f5f5f5; 
             overflow: hidden; 
+            display: flex;
+            flex-direction: column;
             height: 100vh;
-            width: 100vw;
+        }
+
+        /* Üst Kısım: Sabit Görsel Alanı (Boyutları Büyütüldü) */
+        .fixed-image-section {
+            width: 100%;
+            height: 55vh; /* Ekranın %55'i görsele ayrıldı */
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; 
+            padding-bottom: 10px;
             position: relative;
         }
 
-        /* Tam Ekran Sabit Arka Plan Görseli */
-        .bg-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover; /* Tüm ekranı kaplar */
-            opacity: 1; /* Transparanlık tamamen kaldırıldı, görsel net! */
-            z-index: 0;
-            pointer-events: none; /* Kaydırmayı engellememesi için */
+        .main-img {
+            width: 95%; /* Genişlik %95'e çıkarıldı */
+            max-width: 500px; /* Maksimum genişlik sınırı artırıldı */
+            height: 52vh; /* Görsel yüksekliği artırıldı */
+            object-fit: contain; /* GÖRSELİN KESİLMEMESİNİ, TAM SIĞMASINI SAĞLAR */
+            border-radius: 12px;
+            background-color: transparent; /* Çerçevenin arkasındaki gri kutu kaldırıldı */
         }
 
-        /* Ekranın En Üstü ve En Altındaki Sabit İpuçları */
-        .hint-top, .hint-bottom {
-            position: fixed;
-            left: 50%;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: 2px;
-            z-index: 10;
-            pointer-events: none;
-            text-align: center;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-            background-color: rgba(0,0,0,0.4);
-            padding: 5px 15px;
-            border-radius: 20px;
-        }
-
-        .hint-top {
-            top: 25px;
-            animation: pulseYTop 2s infinite;
-        }
-
-        .hint-bottom {
-            bottom: 25px;
-            animation: pulseYBottom 2s infinite;
-        }
-
-        @keyframes pulseYTop {
-            0% { opacity: 0.4; transform: translate(-50%, 0); }
-            50% { opacity: 1; transform: translate(-50%, -6px); }
-            100% { opacity: 0.4; transform: translate(-50%, 0); }
-        }
-
-        @keyframes pulseYBottom {
-            0% { opacity: 0.4; transform: translate(-50%, 0); }
-            50% { opacity: 1; transform: translate(-50%, -6px); }
-            100% { opacity: 0.4; transform: translate(-50%, 0); }
-        }
-
-        /* Kaydırma Konteyneri (Tam Ekran) */
+        /* Alt Kısım: Kaydırma Konteyneri */
         .carousel-container {
             width: 100%;
-            height: 100vh; 
+            height: 45vh; /* Ekranın alt %45'i metinlere kaldı */
             display: flex;
-            flex-direction: column; 
-            overflow-y: auto; 
-            overflow-x: hidden;
-            scroll-snap-type: y mandatory; 
+            overflow-x: auto;
+            scroll-snap-type: x mandatory; 
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch; 
-            position: relative;
-            z-index: 2; /* Arka planın üstünde durmasını sağlar */
         }
 
         .carousel-container::-webkit-scrollbar { display: none; }
@@ -92,59 +57,69 @@
 
         /* Her Bir Yaprak (Metin Slaytı) */
         .slide {
-            flex: 0 0 100vh; 
-            height: 100vh;
-            width: 100vw;
+            flex: 0 0 100vw;
+            height: 100%;
             scroll-snap-align: start; 
             display: flex;
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center;     
+            justify-content: center;
             padding: 0 20px;
+            position: relative;
         }
 
-        /* Metin Alanı (Okunabilirliği artırmak için arka fon eklendi) */
+        /* Metin Alanı */
         .slide-text {
             width: 100%;
-            max-width: 500px;
-            max-height: 70vh; 
+            max-width: 450px;
+            height: 38vh; /* Yeni alana göre dikey kaydırma boyu ayarlandı */
             overflow-y: auto; 
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.65); /* Yazının arkasındaki şık, yarı saydam siyah fon */
-            padding: 30px 20px;
-            border-radius: 15px; /* Köşeleri yumuşatıldı */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Derinlik hissi veren gölge */
-            backdrop-filter: blur(3px); /* Arka planı hafif flu yaparak yazıyı öne çıkarır (iPhone'larda harika görünür) */
+            padding: 0 10px;
         }
 
         .slide-text::-webkit-scrollbar { display: none; }
         .slide-text { -ms-overflow-style: none; scrollbar-width: none; }
 
         .slide-text p {
-            font-size: 1.15rem; 
-            line-height: 1.7;
-            color: #ffffff; 
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #d1d1d1;
+            margin-bottom: 20px;
             font-style: italic;
-            margin-bottom: 15px;
+        }
+
+        /* Kaydırma İpucu (Swipe animasyonu) */
+        .swipe-hint {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: #888;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; margin-left: 10px; }
+            100% { opacity: 0.5; margin-left: 0; }
         }
     </style>
 </head>
 <body>
 
-<!-- ARKA PLAN GÖRSELİ (TAMAMEN NET) -->
-<img src="main-img.png" alt="Arka Plan" class="bg-image">
+<div class="fixed-image-section">
+    <!-- Görsel isminin main-img.png olduğundan emin ol -->
+    <img src="main-img.png" alt="Ana Görsel" class="main-img">
+</div>
 
-<!-- SABİT İPUÇLARI -->
-<div class="hint-top">YUKARI KAYDIRIN &uarr;</div>
-<div class="hint-bottom">YUKARI KAYDIRIN &uarr;</div>
-
-<!-- KAYDIRILABİLİR YAZILAR -->
 <div class="carousel-container">
     
     <section class="slide">
         <div class="slide-text">
             <p>"Beni yüzyıllar boyunca zayıf, histerik, sadece bir erkeğin aşkı için aklını yitiren veya onun için yok olan trajik bir gölge gibi anlattılar. Nehrin sularına kendimi bırakırken ya da tanrılara kurban edilirken, çaresizliğimi asaletim sandılar. Oysa ben zayıf değildim; sadece kendi sesimi duyurabileceğim, nefes alabileceğim adil bir dünya bırakmadılar bana. Erkeklerin yazdığı o büyük metinlerin satır aralarında, itaat etmeyi reddeden öfkeli sesim sonsuza dek yankılanacak.”</p>
         </div>
+        <div class="swipe-hint">KAYDIRIN &rarr;</div>
     </section>
 
     <section class="slide">
