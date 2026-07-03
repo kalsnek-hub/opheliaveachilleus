@@ -13,7 +13,7 @@
         }
         body { 
             font-family: 'Helvetica Neue', Arial, sans-serif; 
-            background-color: #0a0a0a; 
+            background-color: #000000; 
             color: #f5f5f5; 
             overflow: hidden; 
             height: 100vh;
@@ -29,7 +29,7 @@
             width: 100vw;
             height: 100vh;
             object-fit: cover; /* Tüm ekranı kaplar */
-            opacity: 0.15; /* Görseli yarı saydam/transparan yapar. (0.0 ile 1.0 arası değiştirebilirsin) */
+            opacity: 1; /* Transparanlık tamamen kaldırıldı, görsel net! */
             z-index: 0;
             pointer-events: none; /* Kaydırmayı engellememesi için */
         }
@@ -39,11 +39,15 @@
             position: fixed;
             left: 50%;
             font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.8);
             letter-spacing: 2px;
             z-index: 10;
             pointer-events: none;
             text-align: center;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+            background-color: rgba(0,0,0,0.4);
+            padding: 5px 15px;
+            border-radius: 20px;
         }
 
         .hint-top {
@@ -57,15 +61,15 @@
         }
 
         @keyframes pulseYTop {
-            0% { opacity: 0.3; transform: translate(-50%, 0); }
+            0% { opacity: 0.4; transform: translate(-50%, 0); }
             50% { opacity: 1; transform: translate(-50%, -6px); }
-            100% { opacity: 0.3; transform: translate(-50%, 0); }
+            100% { opacity: 0.4; transform: translate(-50%, 0); }
         }
 
         @keyframes pulseYBottom {
-            0% { opacity: 0.3; transform: translate(-50%, 0); }
+            0% { opacity: 0.4; transform: translate(-50%, 0); }
             50% { opacity: 1; transform: translate(-50%, -6px); }
-            100% { opacity: 0.3; transform: translate(-50%, 0); }
+            100% { opacity: 0.4; transform: translate(-50%, 0); }
         }
 
         /* Kaydırma Konteyneri (Tam Ekran) */
@@ -94,36 +98,40 @@
             scroll-snap-align: start; 
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Yazıları ekranın dikey tam ortasına alır */
-            align-items: center;     /* Yazıları yatay tam ortaya alır */
-            padding: 0 25px;
+            justify-content: center; 
+            align-items: center;     
+            padding: 0 20px;
         }
 
-        /* Metin Alanı (Büyütüldü) */
+        /* Metin Alanı (Okunabilirliği artırmak için arka fon eklendi) */
         .slide-text {
             width: 100%;
             max-width: 500px;
-            max-height: 75vh; /* Yazıların ekrandan taşmasını engeller */
+            max-height: 70vh; 
             overflow-y: auto; 
             text-align: center;
+            background-color: rgba(0, 0, 0, 0.65); /* Yazının arkasındaki şık, yarı saydam siyah fon */
+            padding: 30px 20px;
+            border-radius: 15px; /* Köşeleri yumuşatıldı */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Derinlik hissi veren gölge */
+            backdrop-filter: blur(3px); /* Arka planı hafif flu yaparak yazıyı öne çıkarır (iPhone'larda harika görünür) */
         }
 
         .slide-text::-webkit-scrollbar { display: none; }
         .slide-text { -ms-overflow-style: none; scrollbar-width: none; }
 
         .slide-text p {
-            font-size: 1.25rem; /* Yazı boyutu büyütüldü */
+            font-size: 1.15rem; 
             line-height: 1.7;
-            color: #ffffff; /* Daha parlak beyaz */
+            color: #ffffff; 
             font-style: italic;
-            /* Arka plan görseli ne renk olursa olsun yazının okunmasını sağlar */
-            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.5); 
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
 
-<!-- ARKA PLAN GÖRSELİ (TÜM EKRANA YAYILIR VE SAYDAMDIR) -->
+<!-- ARKA PLAN GÖRSELİ (TAMAMEN NET) -->
 <img src="main-img.png" alt="Arka Plan" class="bg-image">
 
 <!-- SABİT İPUÇLARI -->
